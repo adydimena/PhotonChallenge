@@ -5,14 +5,17 @@ import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.TableLayout;
 import android.widget.TableRow;
+import android.widget.Toast;
 
 import com.example.ady.PhotonChallenge.Data.Remote.NewsDataSource;
 import com.example.ady.PhotonChallenge.R;
+import com.example.ady.PhotonChallenge.Util.SavingPath;
 import com.example.ady.PhotonChallenge.Util.pojo.GetNews;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+import java.util.Stack;
 
 import javax.inject.Inject;
 
@@ -93,9 +96,121 @@ public class MainPresenter implements MainContract.Presenter {
             row = (TableRow) table.getChildAt(i);
             for (int j = 0; j <column ; j++) {
                 editText = (EditText) row.getChildAt(j);
-                editText.setText(""+random.nextInt(35));
+                editText.setBackgroundResource(R.color.white);
+                editText.setText(""+random.nextInt(20));
             }
         }
+    }
+
+    @Override
+    public void getMatrix(TableLayout table, Integer userRowChoice, Integer userColumnChoice, Context context) {
+        TableRow row = new TableRow(context);
+        EditText editText = new EditText(context);
+        Integer[][] matrix = new Integer[userRowChoice][userColumnChoice];
+        for (int i = 0; i < userRowChoice ; i++) {
+            row = (TableRow) table.getChildAt(i);
+            for (int j = 0; j <userColumnChoice ; j++) {
+                editText = (EditText) row.getChildAt(j);
+                matrix[i][j]=Integer.parseInt(editText.getText().toString());
+            }
+        }
+        view.setMatrix(matrix);
+
+    }
+
+    @Override
+    public void getComputeLowestCost(Integer[][] matrix, Integer userRowChoice, Integer userColumnChoice, Context context) {
+        List<Integer> toCompare = new ArrayList<>();
+        List<Integer> pathrow = new ArrayList<>();
+        List<Integer> nextNum = new ArrayList<>();
+        int sum = 0;
+        int min = 0;
+        int next = 0;
+        int rowindex = 0;
+        List<SavingPath> savingPaths = new ArrayList<>();
+        String Complete = "YES";
+        for (int i = 0; i <userColumnChoice ; i++) {
+            for (int j = 0; j <userRowChoice ; j++) {
+                toCompare.add(matrix[j][i]);
+            }
+
+            if(i==0) {
+                min = toCompare.get(0);
+                for (int j = 0; j < toCompare.size(); j++) {
+                    if (min > toCompare.get(j)) {
+                        min = toCompare.get(j);
+                        rowindex = j;
+                    }
+                }
+                next = min;
+            }
+            else {
+                if (toCompare.size() > 3){
+
+                    if (rowindex == 0) {
+                        next = toCompare.get(0);
+                        rowindex = 0;
+                        if (next > toCompare.get(1)) {
+                            next = toCompare.get(1);
+                            rowindex = 1;
+                        }
+                        if (next > toCompare.get(toCompare.size() - 1)) {
+                            next = toCompare.get(toCompare.size() - 1);
+                            rowindex = toCompare.size() - 1;
+                        }
+                    } else if (rowindex == toCompare.size() - 1) {
+                        next = toCompare.get(0);
+                        rowindex = 0;
+                        if (next > toCompare.get(toCompare.size() - 1)) {
+                            next = toCompare.get(toCompare.size() - 1);
+                            rowindex = toCompare.size() - 1;
+                        }
+                        if (next > toCompare.get(toCompare.size() - 2)) {
+                            next = toCompare.get(toCompare.size() - 2);
+                            rowindex = toCompare.size() - 2;
+                        }
+                    } else {
+                        next = toCompare.get(rowindex - 1);
+                        int k = rowindex-1;
+                        rowindex -=1;
+                        for (int j = k; j < k + 2; j++) {
+                            if (next > toCompare.get(j)) {
+                                next = toCompare.get(j);
+                                rowindex = j;
+                            }
+                        }
+                    }
+            }else{
+                    min = toCompare.get(0);
+                    rowindex = 0;
+                    for (int j = 0; j < toCompare.size(); j++) {
+                        if (min > toCompare.get(j)) {
+                            min = toCompare.get(j);
+                            rowindex = j;
+                        }
+                    }
+                    next = min;
+                }
+            }
+
+
+            if(sum + next >= 50 ){
+                Complete = "NO";
+                break;
+            }
+            nextNum.add(next);
+            sum += next;
+            pathrow.add(rowindex);
+            toCompare.clear();
+            //Toast.makeText(this, "the min is "+ min
+            //      , Toast.LENGTH_SHORT).show();
+
+        }
+        view.ColoringTable(nextNum,pathrow);
+        view.setPathRow(pathrow);
+        view.setSum(sum);
+        view.setComplete(Complete);
+        pathrow.clear();
     }
 
 

@@ -16,13 +16,11 @@ import android.widget.TableRow;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.ady.PhotonChallenge.AppName;
+import com.example.ady.PhotonChallenge.PhotonChallenge;
 import com.example.ady.PhotonChallenge.Data.Local.NewsLocalDatabase;
 import com.example.ady.PhotonChallenge.R;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 import javax.inject.Inject;
 
@@ -36,6 +34,7 @@ public class MainActivity extends AppCompatActivity implements MainContract.View
     Spinner rowOption, columnOption;
     Integer userRowChoice =1  ,userCloumnChoice=5 ;
     TableLayout table;
+    TextView displayYesNo,displaySum,displayPath;
 
 
 
@@ -43,7 +42,7 @@ public class MainActivity extends AppCompatActivity implements MainContract.View
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        AppName.get(this).getMainComponent().inject(this);
+        PhotonChallenge.get(this).getMainComponent().inject(this);
         mainPresenter.attachView(this);
         NewsLocalDatabase newsLocalDatabase = new NewsLocalDatabase(this);
         // any operation after this....
@@ -52,9 +51,17 @@ public class MainActivity extends AppCompatActivity implements MainContract.View
         getRowandColomnbyChooseByUser();
         table = findViewById(R.id.table);
        // mainPresenter.getTableSetup(table,userRowChoice,userCloumnChoice,this);
+        BindResultViews();
 
 
     }
+
+    private void BindResultViews() {
+        displayYesNo = findViewById(R.id.displayYesNo);
+        displaySum = findViewById(R.id.DisplaySum);
+        displayPath = findViewById(R.id.DisplayPath);
+    }
+
     private void getRowandColomnbyChooseByUser() {
         rowOption.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -105,6 +112,61 @@ public class MainActivity extends AppCompatActivity implements MainContract.View
         rowOption.setAdapter(row);
         columnOption.setAdapter(column);
     }
+
+    @Override
+    public void setMatrix(Integer[][] matrix) {
+        mainPresenter.getComputeLowestCost(matrix,userRowChoice,userCloumnChoice,this);
+    }
+
+    @Override
+    public void setPathRow(List<Integer> pathrow) {
+        displayPath.setText(" ");
+        for (int j = 0; j <pathrow.size() ; j++) {
+            displayPath.append(""+ pathrow.get(j));
+        }
+
+    }
+
+    @Override
+    public void setSum(Integer sum) {
+        displaySum.setText(""+sum);
+
+    }
+
+    @Override
+    public void setComplete(String Complete) {
+        displayYesNo.setText(Complete);
+    }
+
+    @Override
+    public void ColoringTable(List<Integer> nextNum, List<Integer> rowPath) {
+        EditText editText = new EditText(this);
+        TableRow row = new TableRow(this);
+        int k = 0;
+        boolean isfound = false;
+
+        for (int i = 0; i < userRowChoice ; i++) {
+            row = (TableRow) table.getChildAt(i);
+            for (int j = 0; j <userCloumnChoice ; j++) {
+                editText = (EditText) row.getChildAt(j);
+                editText.setBackgroundResource(R.color.white);
+            }
+        }
+        for (int i = 0; i <rowPath.size() ; i++) {
+            row = (TableRow) table.getChildAt(rowPath.get(i));
+            isfound = false;
+            for (int j = 0; j <userCloumnChoice ; j++) {
+                editText = (EditText) row.getChildAt(j);
+                if (Integer.parseInt(editText.getText().toString()) == nextNum.get(k) && !isfound && j >=i){
+                    editText.setBackgroundResource(R.color.Green);
+                    isfound = true;
+                }
+            }
+            k++;
+
+        }
+    }
+
     @Override
     protected void onDestroy() {
         super.onDestroy();
@@ -139,11 +201,8 @@ public class MainActivity extends AppCompatActivity implements MainContract.View
     }
 
     public void run(View view) {
-        TextView displayYesNo,displaySum,displayPath;
-        displayYesNo = findViewById(R.id.displayYesNo);
-        displaySum = findViewById(R.id.DisplaySum);
-        displayPath = findViewById(R.id.DisplayPath);
-
+        mainPresenter.getMatrix(table,userRowChoice,userCloumnChoice,this);
+        /*
         String Complete = "YES";
         TableRow row = new TableRow(this);
         EditText editText = new EditText(this);
@@ -196,6 +255,7 @@ public class MainActivity extends AppCompatActivity implements MainContract.View
         }
         displaySum.setText(""+sum);
         displayYesNo.setText(Complete);
+        */
 
     }
 }

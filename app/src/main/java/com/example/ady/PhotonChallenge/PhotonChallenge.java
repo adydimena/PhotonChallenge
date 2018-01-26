@@ -8,21 +8,19 @@ import com.example.ady.PhotonChallenge.DI.app.AppModule;
 import com.example.ady.PhotonChallenge.DI.app.DaggerAppComponent;
 import com.example.ady.PhotonChallenge.DI.main.MainComponent;
 import com.example.ady.PhotonChallenge.DI.main.MainModule;
-import com.example.ady.PhotonChallenge.DI.main2.Main2Component;
-import com.example.ady.PhotonChallenge.DI.main2.Main2Module;
 import com.example.ady.PhotonChallenge.Util.HelperClasses.SharedPref;
 
 /**
  * Created by Ady on 1/14/2018.
  */
 
-public class AppName extends Application {
+public class PhotonChallenge extends Application {
     private static final String baseURl = "https://newsapi.org/v2/";
     public static final String APIkey = "5c3f38ea67d34463b56c92efc0c8a0f4";
-    public static final String TAG = AppName.class.getSimpleName();
+    public static final String TAG = PhotonChallenge.class.getSimpleName();
     private AppComponent appComponent;
     private MainComponent mainComponent;
-    private Main2Component main2Component;
+
 
     @Override
     public void onCreate() {
@@ -32,23 +30,17 @@ public class AppName extends Application {
                 .appModule(appModule)
                 .build();
     }
-    public static AppName get(Context context){
+    public static PhotonChallenge get(Context context){
 
-        return (AppName) context.getApplicationContext();
+        return (PhotonChallenge) context.getApplicationContext();
     }
     public MainComponent getMainComponent(){
         mainComponent = appComponent.add(new MainModule());
         return  mainComponent;
     }
-    public Main2Component getMain2Component(){
-        main2Component = appComponent.add(new Main2Module());
-        return main2Component;
-    }
+
     public void ClearMainCoponent(){
         mainComponent = null;
-    }
-    public void ClearMain2Coponent(){
-        main2Component = null;
     }
 
     @Override

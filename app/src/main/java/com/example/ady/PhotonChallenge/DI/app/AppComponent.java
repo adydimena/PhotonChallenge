@@ -2,8 +2,7 @@ package com.example.ady.PhotonChallenge.DI.app;
 
 import com.example.ady.PhotonChallenge.DI.main.MainComponent;
 import com.example.ady.PhotonChallenge.DI.main.MainModule;
-import com.example.ady.PhotonChallenge.DI.main2.Main2Component;
-import com.example.ady.PhotonChallenge.DI.main2.Main2Module;
+
 
 import dagger.Component;
 
@@ -14,6 +13,6 @@ import dagger.Component;
 @Component(modules = AppModule.class)
 public interface AppComponent {
     MainComponent add(MainModule mainModule);
-    Main2Component add(Main2Module main2Module);
+
 
 }

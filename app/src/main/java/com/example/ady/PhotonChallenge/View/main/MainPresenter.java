@@ -1,3 +1,7 @@
+/* Created by Ady
+ * This is the Presenter. beacuse this project is simple the presenter does some (simple) computations. But in inorder to
+ * compute the lowest cost it call the model( CostCalculator) to do the work and then it passes the result to the view.
+ */
 package com.example.ady.PhotonChallenge.View.main;
 
 import android.content.Context;
@@ -5,17 +9,15 @@ import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.TableLayout;
 import android.widget.TableRow;
-import android.widget.Toast;
 
-import com.example.ady.PhotonChallenge.Data.Remote.NewsDataSource;
+
 import com.example.ady.PhotonChallenge.R;
-import com.example.ady.PhotonChallenge.Util.SavingPath;
-import com.example.ady.PhotonChallenge.Util.pojo.GetNews;
+import com.example.ady.PhotonChallenge.Model.CostCalculator;
+
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
-import java.util.Stack;
 
 import javax.inject.Inject;
 
@@ -25,13 +27,8 @@ import javax.inject.Inject;
 
 public class MainPresenter implements MainContract.Presenter {
     MainContract.View view;
-    NewsDataSource newsDataSource;
-    GetNews dummyGetnews = null;
 
-    @Inject
-    public MainPresenter(NewsDataSource newsDataSource){
-        this.newsDataSource = newsDataSource;
-    }
+
 
     public MainPresenter() {
         //
@@ -79,9 +76,7 @@ public class MainPresenter implements MainContract.Presenter {
                 etItem[j] = new EditText(context);
                 etItem[j].setWidth(250);
                 etItem[j].setHeight(300);
-
                 tableRow.addView(etItem[j]);
-
             }
             table.addView(tableRow,i);
         }
@@ -120,97 +115,12 @@ public class MainPresenter implements MainContract.Presenter {
 
     @Override
     public void getComputeLowestCost(Integer[][] matrix, Integer userRowChoice, Integer userColumnChoice, Context context) {
-        List<Integer> toCompare = new ArrayList<>();
-        List<Integer> pathrow = new ArrayList<>();
-        List<Integer> nextNum = new ArrayList<>();
-        int sum = 0;
-        int min = 0;
-        int next = 0;
-        int rowindex = 0;
-        List<SavingPath> savingPaths = new ArrayList<>();
-        String Complete = "YES";
-        for (int i = 0; i <userColumnChoice ; i++) {
-            for (int j = 0; j <userRowChoice ; j++) {
-                toCompare.add(matrix[j][i]);
-            }
-
-            if(i==0) {
-                min = toCompare.get(0);
-                for (int j = 0; j < toCompare.size(); j++) {
-                    if (min > toCompare.get(j)) {
-                        min = toCompare.get(j);
-                        rowindex = j;
-                    }
-                }
-                next = min;
-            }
-            else {
-                if (toCompare.size() > 3){
-
-                    if (rowindex == 0) {
-                        next = toCompare.get(0);
-                        rowindex = 0;
-                        if (next > toCompare.get(1)) {
-                            next = toCompare.get(1);
-                            rowindex = 1;
-                        }
-                        if (next > toCompare.get(toCompare.size() - 1)) {
-                            next = toCompare.get(toCompare.size() - 1);
-                            rowindex = toCompare.size() - 1;
-                        }
-                    } else if (rowindex == toCompare.size() - 1) {
-                        next = toCompare.get(0);
-                        rowindex = 0;
-                        if (next > toCompare.get(toCompare.size() - 1)) {
-                            next = toCompare.get(toCompare.size() - 1);
-                            rowindex = toCompare.size() - 1;
-                        }
-                        if (next > toCompare.get(toCompare.size() - 2)) {
-                            next = toCompare.get(toCompare.size() - 2);
-                            rowindex = toCompare.size() - 2;
-                        }
-                    } else {
-                        next = toCompare.get(rowindex - 1);
-                        int k = rowindex-1;
-                        rowindex -=1;
-                        for (int j = k; j < k + 2; j++) {
-                            if (next > toCompare.get(j)) {
-                                next = toCompare.get(j);
-                                rowindex = j;
-                            }
-                        }
-                    }
-            }else{
-                    min = toCompare.get(0);
-                    rowindex = 0;
-                    for (int j = 0; j < toCompare.size(); j++) {
-                        if (min > toCompare.get(j)) {
-                            min = toCompare.get(j);
-                            rowindex = j;
-                        }
-                    }
-                    next = min;
-                }
-            }
-
-
-            if(sum + next >= 50 ){
-                Complete = "NO";
-                break;
-            }
-            nextNum.add(next);
-            sum += next;
-            pathrow.add(rowindex);
-            toCompare.clear();
-            //Toast.makeText(this, "the min is "+ min
-            //      , Toast.LENGTH_SHORT).show();
-
-        }
-        view.ColoringTable(nextNum,pathrow);
-        view.setPathRow(pathrow);
-        view.setSum(sum);
-        view.setComplete(Complete);
-        pathrow.clear();
+        CostCalculator costCalculator = new CostCalculator(matrix,userRowChoice,userColumnChoice);
+        view.ColoringTable(costCalculator.getNextNum(),costCalculator.getPathrow());
+        view.setPathRow(costCalculator.getPathrow());
+        view.setSum(costCalculator.getSum());
+        view.setComplete(costCalculator.getComplete());
+        costCalculator.clear();
     }
 
 

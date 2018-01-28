@@ -1,6 +1,7 @@
 package com.example.ady.PhotonChallenge.DI.app;
 
-import com.example.ady.PhotonChallenge.Data.Remote.NewsDataSource;
+
+import com.example.ady.PhotonChallenge.Model.CostCalculator;
 
 import dagger.Module;
 import dagger.Provides;
@@ -10,18 +11,15 @@ import dagger.Provides;
  */
 @Module
 public class AppModule {
-    private String baseURL;
-    private String APIkey;
     private final String TAG = AppModule.class.getSimpleName();
 
-    public AppModule(String baseURL, String APIkey) {
-        this.baseURL = baseURL;
-        this.APIkey = APIkey;
+    public AppModule() {
+
     }
     @Provides
-    NewsDataSource providesRemoteDataSource(){
+    CostCalculator providesRemoteDataSource(){
 
-        return new NewsDataSource(baseURL,APIkey);
+        return new CostCalculator();
 
     }
 }

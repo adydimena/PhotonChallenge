@@ -1,6 +1,7 @@
 package com.example.ady.PhotonChallenge.DI.main;
 
-import com.example.ady.PhotonChallenge.Data.Remote.NewsDataSource;
+
+import com.example.ady.PhotonChallenge.Model.CostCalculator;
 import com.example.ady.PhotonChallenge.View.main.MainPresenter;
 
 import dagger.Module;
@@ -13,7 +14,7 @@ import dagger.Provides;
 @Module
 public class MainModule {
     @Provides
-    MainPresenter providesMainPresenter (NewsDataSource newsDataSource){
-        return new MainPresenter(newsDataSource);
+    MainPresenter providesMainPresenter (CostCalculator newsDataSource){
+        return new MainPresenter();
     }
 }

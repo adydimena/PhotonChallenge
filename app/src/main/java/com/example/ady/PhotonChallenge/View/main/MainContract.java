@@ -1,3 +1,6 @@
+/* Created by Ady
+ * This is the Main Contractor. It sets up the interfaces that allow communication between presenter and view.
+ */
 package com.example.ady.PhotonChallenge.View.main;
 
 import android.content.Context;

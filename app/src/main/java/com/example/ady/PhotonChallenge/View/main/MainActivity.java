@@ -1,3 +1,7 @@
+/* Created by Ady
+ * This is my View on my MVP. This gets the result from the Presenter and sets up the views. It does some simple logic
+ * such as traversing the matrix
+ */
 package com.example.ady.PhotonChallenge.View.main;
 
 import android.os.Handler;
@@ -17,7 +21,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.ady.PhotonChallenge.PhotonChallenge;
-import com.example.ady.PhotonChallenge.Data.Local.NewsLocalDatabase;
 import com.example.ady.PhotonChallenge.R;
 
 import java.util.List;
@@ -27,24 +30,17 @@ import javax.inject.Inject;
 public class MainActivity extends AppCompatActivity implements MainContract.View, AdapterView.OnItemClickListener {
     @Inject
     MainPresenter mainPresenter;
-    TextView textView;
-    private DrawerLayout dlayout;
-    private ActionBarDrawerToggle btnToggle;
     public static final String TAG = MainActivity.class.getSimpleName();
     Spinner rowOption, columnOption;
     Integer userRowChoice =1  ,userCloumnChoice=5 ;
     TableLayout table;
     TextView displayYesNo,displaySum,displayPath;
-
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         PhotonChallenge.get(this).getMainComponent().inject(this);
         mainPresenter.attachView(this);
-        NewsLocalDatabase newsLocalDatabase = new NewsLocalDatabase(this);
         // any operation after this....
         bindSpinners();
         mainPresenter.getrowsANDcolumns(this);

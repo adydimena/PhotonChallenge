@@ -12,7 +12,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name="com.example.ady.PhotonChallenge.View.main.MainActivity">
+        <activity android:name="com.example.ady.PhotonChallenge.view.main.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

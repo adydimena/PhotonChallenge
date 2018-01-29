@@ -1,20 +1,13 @@
 package com.example.ady.PhotonChallenge;
 
-import android.app.Instrumentation;
-import android.content.Context;
-import android.graphics.ColorSpace;
-
-import com.example.ady.PhotonChallenge.Model.CostCalculator;
-import com.example.ady.PhotonChallenge.View.main.MainActivity;
+import com.example.ady.PhotonChallenge.model.costCalculator;
 
 import org.junit.Test;
 
 import static org.junit.Assert.*;
 
 /**
- * Example local unit test, which will execute on the development machine (host).
- *
- * @see <a href="http://d.android.com/tools/testing">Testing documentation</a>
+ * This is the test file. To run it please click the class the select run.
  */
 public class PhotonChallengeTest {
     @Test
@@ -28,7 +21,7 @@ public class PhotonChallengeTest {
         };
         Integer userRowChoice = 5;
         Integer userColumnChoice = 6;
-        CostCalculator costCalculator = new CostCalculator(matrix,userRowChoice,userColumnChoice);
+        costCalculator costCalculator = new costCalculator(matrix,userRowChoice,userColumnChoice);
         Integer expected = 16;
         Integer actutal = costCalculator.getSum();
         int delta = 2;
@@ -45,7 +38,7 @@ public class PhotonChallengeTest {
         };
         Integer userRowChoice = 5;
         Integer userColumnChoice = 6;
-        CostCalculator costCalculator = new CostCalculator(matrix,userRowChoice,userColumnChoice);
+        costCalculator costCalculator = new costCalculator(matrix,userRowChoice,userColumnChoice);
         Integer expected = 11;
         Integer actutal = costCalculator.getSum();
         int delta = 2;
@@ -60,7 +53,7 @@ public class PhotonChallengeTest {
         };
         Integer userRowChoice = 3;
         Integer userColumnChoice = 5;
-        CostCalculator costCalculator = new CostCalculator(matrix,userRowChoice,userColumnChoice);
+        costCalculator costCalculator = new costCalculator(matrix,userRowChoice,userColumnChoice);
         Integer expected = 48;
         Integer actutal = costCalculator.getSum();
         int delta = 2;
@@ -74,7 +67,7 @@ public class PhotonChallengeTest {
         };
         Integer userRowChoice = 1;
         Integer userColumnChoice = 5;
-        CostCalculator costCalculator = new CostCalculator(matrix,userRowChoice,userColumnChoice);
+        costCalculator costCalculator = new costCalculator(matrix,userRowChoice,userColumnChoice);
         Integer expected = 26;
         Integer actutal = costCalculator.getSum();
         int delta = 2;
@@ -92,7 +85,7 @@ public class PhotonChallengeTest {
         };
         Integer userRowChoice = 5;
         Integer userColumnChoice = 1;
-        CostCalculator costCalculator = new CostCalculator(matrix,userRowChoice,userColumnChoice);
+        costCalculator costCalculator = new costCalculator(matrix,userRowChoice,userColumnChoice);
         Integer expected = 3;
         Integer actutal = costCalculator.getSum();
         int delta = 2;
@@ -107,7 +100,7 @@ public class PhotonChallengeTest {
         };
         Integer userRowChoice = 3;
         Integer userColumnChoice = 5;
-        CostCalculator costCalculator = new CostCalculator(matrix,userRowChoice,userColumnChoice);
+        costCalculator costCalculator = new costCalculator(matrix,userRowChoice,userColumnChoice);
         Integer expected = 0;
         Integer actutal = costCalculator.getSum();
         int delta = 2;
@@ -122,7 +115,7 @@ public class PhotonChallengeTest {
         };
         Integer userRowChoice = 3;
         Integer userColumnChoice = 4;
-        CostCalculator costCalculator = new CostCalculator(matrix,userRowChoice,userColumnChoice);
+        costCalculator costCalculator = new costCalculator(matrix,userRowChoice,userColumnChoice);
         Integer expected = 14;
         Integer actutal = costCalculator.getSum();
         int delta = 2;
@@ -138,7 +131,7 @@ public class PhotonChallengeTest {
         };
         Integer userRowChoice = 4;
         Integer userColumnChoice = 4;
-        CostCalculator costCalculator = new CostCalculator(matrix,userRowChoice,userColumnChoice);
+        costCalculator costCalculator = new costCalculator(matrix,userRowChoice,userColumnChoice);
         Integer expected = 0;
         Integer actutal = costCalculator.getSum();
         int delta = 2;
@@ -154,7 +147,7 @@ public class PhotonChallengeTest {
         };
         Integer userRowChoice = 4;
         Integer userColumnChoice = 4;
-        CostCalculator costCalculator = new CostCalculator(matrix,userRowChoice,userColumnChoice);
+        costCalculator costCalculator = new costCalculator(matrix,userRowChoice,userColumnChoice);
         Integer expected = 0;
         Integer actutal = costCalculator.getSum();
         int delta = 2;

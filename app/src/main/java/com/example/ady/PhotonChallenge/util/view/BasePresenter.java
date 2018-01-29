@@ -1,9 +1,7 @@
-package com.example.ady.PhotonChallenge.Util.view;
-
+package com.example.ady.PhotonChallenge.util.view;
 /**
- * Created by Ady on 1/14/2018.
+ * Created by Ady.
  */
-
 public interface BasePresenter <V extends BaseView>  {
     void attachView (V view);
     void detachView();

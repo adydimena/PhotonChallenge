@@ -1,52 +1,37 @@
 /* Created by Ady
- * This is the Presenter. beacuse this project is simple the presenter does some (simple) computations. But in inorder to
- * compute the lowest cost it call the model( CostCalculator) to do the work and then it passes the result to the view.
+ * This is the Presenter. beacuse this project is simple the presenter does some (simple) computations.
+ * But in in order to compute the lowest cost it call the model( CostCalculator) to do the work
+ * and then it passes the result to the view.
  */
-package com.example.ady.PhotonChallenge.View.main;
-
+package com.example.ady.PhotonChallenge.view.main;
 import android.content.Context;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.TableLayout;
 import android.widget.TableRow;
-
-
 import com.example.ady.PhotonChallenge.R;
-import com.example.ady.PhotonChallenge.Model.CostCalculator;
-
-
+import com.example.ady.PhotonChallenge.model.costCalculator;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
-
-import javax.inject.Inject;
-
 /**
  * Created by Ady on 1/14/2018.
  */
-
 public class MainPresenter implements MainContract.Presenter {
     MainContract.View view;
-
-
-
     public MainPresenter() {
         //
     }
     @Override
     public void attachView(MainContract.View view) {
         this.view = view;
-
     }
-
     @Override
     public void detachView() {
         this.view = null;
-
     }
-
     @Override
-    public void getrowsANDcolumns(Context context) {
+    public void getRowAndColumn(Context context) {
         List<Integer> rows = new ArrayList<>();
         List<Integer> columns = new ArrayList<>();
         for (int i =1 ; i < 6 ; i++) {
@@ -59,12 +44,10 @@ public class MainPresenter implements MainContract.Presenter {
                 R.layout.support_simple_spinner_dropdown_item,rows);
         ArrayAdapter<Integer> columnadapter = new ArrayAdapter<Integer>(context,
                 R.layout.support_simple_spinner_dropdown_item,columns);
-        view.setrowsANDClomuns(rowadapter,columnadapter);
+        view.setRowAndColmun(rowadapter,columnadapter);
     }
-
     @Override
     public void getTableSetup(TableLayout table, Integer userRowChoice, Integer userColumnChoice, Context context) {
-
         TableRow tableRow;
         EditText[] etItem = new EditText[userColumnChoice];
         table.removeAllViews();
@@ -81,7 +64,6 @@ public class MainPresenter implements MainContract.Presenter {
             table.addView(tableRow,i);
         }
     }
-
     @Override
     public void getRandom(Integer userrowChoice, Integer column, TableLayout table, Context context) {
         TableRow row = new TableRow(context);
@@ -96,7 +78,6 @@ public class MainPresenter implements MainContract.Presenter {
             }
         }
     }
-
     @Override
     public void getMatrix(TableLayout table, Integer userRowChoice, Integer userColumnChoice, Context context) {
         TableRow row = new TableRow(context);
@@ -110,18 +91,14 @@ public class MainPresenter implements MainContract.Presenter {
             }
         }
         view.setMatrix(matrix);
-
     }
-
     @Override
     public void getComputeLowestCost(Integer[][] matrix, Integer userRowChoice, Integer userColumnChoice, Context context) {
-        CostCalculator costCalculator = new CostCalculator(matrix,userRowChoice,userColumnChoice);
-        view.ColoringTable(costCalculator.getNextNum(),costCalculator.getPathrow());
+        costCalculator costCalculator = new costCalculator(matrix,userRowChoice,userColumnChoice);
+        view.coloringTable(costCalculator.getNextNum(),costCalculator.getPathrow());
         view.setPathRow(costCalculator.getPathrow());
         view.setSum(costCalculator.getSum());
         view.setComplete(costCalculator.getComplete());
         costCalculator.clear();
     }
-
-
 }

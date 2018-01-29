@@ -11,7 +11,7 @@ import static org.junit.Assert.*;
  */
 public class PhotonChallengeTest {
     @Test
-    public void CostCalculator1() {
+    public void costCalculator1() {
         Integer[][] matrix = new Integer[][]{
                 { 3, 4, 1, 2, 8, 6 },
                 { 6, 1, 8, 2, 7, 4 },
@@ -25,10 +25,10 @@ public class PhotonChallengeTest {
         Integer expected = 16;
         Integer actutal = costCalculator.getSum();
         int delta = 2;
-        assertEquals("The CostCalculator1 Failed",expected, actutal,delta);
+        assertEquals("The costCalculator1 Failed",expected, actutal,delta);
     }
     @Test
-    public void CostCalculator2() {
+    public void costCalculator2() {
         Integer[][] matrix = new Integer[][]{
                 { 3, 4, 1, 2, 8, 6 },
                 { 6, 1, 8, 2, 7, 4 },
@@ -42,10 +42,10 @@ public class PhotonChallengeTest {
         Integer expected = 11;
         Integer actutal = costCalculator.getSum();
         int delta = 2;
-        assertEquals("The CostCalculator2 Failed",expected, actutal,delta);
+        assertEquals("The costCalculator2 Failed",expected, actutal,delta);
     }
     @Test
-    public void CostCalculator3() {
+    public void costCalculator3() {
         Integer[][] matrix = new Integer[][]{
                 { 19, 10, 19, 10, 19 },
                 { 21, 23, 20, 19, 12 },
@@ -57,11 +57,11 @@ public class PhotonChallengeTest {
         Integer expected = 48;
         Integer actutal = costCalculator.getSum();
         int delta = 2;
-        assertEquals("The CostCalculator3 Failed",expected, actutal,delta);
+        assertEquals("The costCalculator3 Failed",expected, actutal,delta);
 
     }
     @Test
-    public void CostCalculator4() {
+    public void costCalculator4() {
         Integer[][] matrix = new Integer[][]{
                 { 5, 8, 5, 3, 5 }
         };
@@ -71,11 +71,11 @@ public class PhotonChallengeTest {
         Integer expected = 26;
         Integer actutal = costCalculator.getSum();
         int delta = 2;
-        assertEquals("The CostCalculator4 Failed",expected, actutal,delta);
+        assertEquals("The costCalculator4 Failed",expected, actutal,delta);
 
     }
     @Test
-    public void CostCalculator5() {
+    public void costCalculator5() {
         Integer[][] matrix = new Integer[][]{
                 {5},
                 {8},
@@ -89,10 +89,10 @@ public class PhotonChallengeTest {
         Integer expected = 3;
         Integer actutal = costCalculator.getSum();
         int delta = 2;
-        assertEquals("The CostCalculator5 Failed",expected, actutal,delta);
+        assertEquals("The costCalculator5 Failed",expected, actutal,delta);
     }
     @Test
-    public void CostCalculator8() {
+    public void costCalculator8() {
         Integer[][] matrix = new Integer[][]{
                 { 69, 10, 19, 10, 19 },
                 { 51, 23, 20, 19, 12 },
@@ -104,10 +104,10 @@ public class PhotonChallengeTest {
         Integer expected = 0;
         Integer actutal = costCalculator.getSum();
         int delta = 2;
-        assertEquals("The CostCalculator8 Failed",expected, actutal,delta);
+        assertEquals("The costCalculator8 Failed",expected, actutal,delta);
     }
     @Test
-    public void CostCalculator9() {
+    public void costCalculator9() {
         Integer[][] matrix = new Integer[][]{
                 { 60, 3, 3, 6 },
                 { 6, 3, 7, 9 },
@@ -119,10 +119,10 @@ public class PhotonChallengeTest {
         Integer expected = 14;
         Integer actutal = costCalculator.getSum();
         int delta = 2;
-        assertEquals("The CostCalculator9 Failed",expected, actutal,delta);
+        assertEquals("The costCalculator9 Failed",expected, actutal,delta);
     }
     @Test
-    public void CostCalculator10() {
+    public void costCalculator10() {
         Integer[][] matrix = new Integer[][]{
                 { 6, 3, -5, 9 },
                 { -5, 2, 4, 10 },
@@ -135,10 +135,10 @@ public class PhotonChallengeTest {
         Integer expected = 0;
         Integer actutal = costCalculator.getSum();
         int delta = 2;
-        assertEquals("The CostCalculator10 Failed",expected, actutal,delta);
+        assertEquals("The costCalculator10 Failed",expected, actutal,delta);
     }
     @Test
-    public void CostCalculator11() {
+    public void costCalculator11() {
         Integer[][] matrix = new Integer[][]{
                 { 6, 3, -5, 9 },
                 { -5, 2, 4, 10 },
@@ -151,6 +151,6 @@ public class PhotonChallengeTest {
         Integer expected = 0;
         Integer actutal = costCalculator.getSum();
         int delta = 2;
-        assertEquals("The CostCalculator11 Failed",expected, actutal,delta);
+        assertEquals("The costCalculator11 Failed",expected, actutal,delta);
     }
 }

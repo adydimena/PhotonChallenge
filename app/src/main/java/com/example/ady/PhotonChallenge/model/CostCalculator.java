@@ -8,8 +8,9 @@ import java.util.ArrayList;
 import java.util.List;
 /**
  * Created by Ady.
- * This is my model From my MVP. This class takes a matrix, the number of Column and Row and computes the lower path cost,
- * the actual wor and the element it passes through.
+ * This is my model From my MVP. This class takes a matrix, the number of Column and Row and
+ * computes the lower path cost, the actual row and the element it passes through.
+ *
  */
 public class CostCalculator {
     public static final String TAG = CostCalculator.class.getSimpleName();
@@ -140,19 +141,37 @@ public class CostCalculator {
     public int getLowestCostIndex(){
         int index=0;
         int min = 0;
-        min = this.sum.get(0);
-        for (int i = 0; i <this.sum.size() ; i++) {
-           if (min == 0){
-        min = this.sum.get(i);
-                index = i;
+        boolean atLestOnePathIsCompleted = false;
+        for (int i = 0; i <this.complete.size() ; i++) {
+            if(this.complete.get(i).matches("YES")){
+                atLestOnePathIsCompleted =true;
             }
         }
-        for (int i = 0; i <this.sum.size() ; i++) {
-                if (min > this.sum.get(i) && this.sum.get(i) != 0) {
+        if(atLestOnePathIsCompleted) {
+            min = this.sum.get(0);
+            index = 0;
+            for (int i = 0; i < this.sum.size(); i++) {
+                if (min > this.sum.get(i)) {
+                    min = this.sum.get(i);
+                    index = i;
+                } else {
+                    if (min == 0 && this.complete.get(i).matches("YES")) {
+                        index = i;
+                        min = this.sum.get(i);
+                    }
+                }
+            }
+        }else{
+            min = this.sum.get(0);
+            index = 0;
+            for (int i = 0; i <this.sum.size() ; i++) {
+                if(min< this.sum.get(i)){
                     min = this.sum.get(i);
                     index = i;
                 }
+            }
         }
         return index;
     }
+
 }

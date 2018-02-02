@@ -15,9 +15,7 @@ import com.example.ady.PhotonChallenge.model.CostCalculator;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
-/**
- * Created by Ady on 1/14/2018.
- */
+
 public class MainPresenter implements MainContract.Presenter {
     MainContract.View view;
     public MainPresenter() {

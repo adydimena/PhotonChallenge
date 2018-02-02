@@ -195,7 +195,6 @@ public class PhotonChallengeTest {
         CostCalculator CostCalculator = new CostCalculator(matrix,userRowChoice,userColumnChoice);
         Integer expected = 14;
         Integer actutal = CostCalculator.getSum();
-
         assertEquals("The costCalculator9 Failed",expected, actutal,delta);
     }
     @Test

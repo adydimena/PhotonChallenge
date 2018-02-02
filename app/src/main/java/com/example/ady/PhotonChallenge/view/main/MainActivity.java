@@ -169,8 +169,6 @@ public class MainActivity extends AppCompatActivity implements MainContract.View
         if(!atLeatOneElementIsEmpty)
             mainPresenter.getMatrix(table, userRowChoice, userCloumnChoice, this);
     }
-
-
       static Handler  handler; // todo changed this to a different class
 
     {

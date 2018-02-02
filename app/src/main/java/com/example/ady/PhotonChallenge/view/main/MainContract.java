@@ -10,9 +10,7 @@ import com.example.ady.PhotonChallenge.util.view.BasePresenter;
 import com.example.ady.PhotonChallenge.util.view.BaseView;
 
 import java.util.List;
-/**
- * Created by Ady on 1/14/2018.
- */
+
 public interface MainContract {
     // methods for the main Activity
     interface View extends BaseView {

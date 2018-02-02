@@ -181,7 +181,6 @@ public class PhotonActivity extends AppCompatActivity implements PhotonContract.
     class MyHandler implements Handler.Callback {
         @Override
         public boolean handleMessage(Message message) {
-            //super.handleMessage(msg);
             if (message.what == 1) {
                 userRowChoice = message.arg1;
             }

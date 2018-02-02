@@ -1,16 +1,34 @@
 package com.example.ady.PhotonChallenge;
 
+import android.test.suitebuilder.annotation.SmallTest;
+
 import com.example.ady.PhotonChallenge.model.PathCalculator;
 
+import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.robolectric.RobolectricTestRunner;
+
+import java.nio.file.Path;
 
 import static org.junit.Assert.*;
 
 /**
  * This is the test file. To run it please click the class the select run.
  */
+
+@SmallTest
 public class PhotonApplicationTest {
-    int delta = 0;
+    int delta;
+    Integer actualInt;
+    String actual;
+    Integer expectedInt;
+    String expected;
+
+    @Before
+    public void preWork(){
+        delta = 0;
+    }
 
     @Test
     public void costCalculator1IsCompleted() {
@@ -23,11 +41,10 @@ public class PhotonApplicationTest {
         };
         Integer userRowChoice = 5;
         Integer userColumnChoice = 6;
-        PathCalculator PathCalculator = new PathCalculator(matrix, userRowChoice, userColumnChoice);
-        String expected = "YES";
-        String actutal = PathCalculator.getComplete();
-
-        assertEquals("The costCalculator1IsCompleted Failed", expected, actutal);
+        PathCalculator pathCalculator = new PathCalculator(matrix, userRowChoice, userColumnChoice);
+        expected = "YES";
+        actual = pathCalculator.getComplete();
+        assertEquals("The costCalculator1IsCompleted Failed", expected, actual);
     }
 
     @Test
@@ -42,10 +59,9 @@ public class PhotonApplicationTest {
         Integer userRowChoice = 5;
         Integer userColumnChoice = 6;
         PathCalculator PathCalculator = new PathCalculator(matrix, userRowChoice, userColumnChoice);
-        Integer expected = 11;
-        Integer actutal = PathCalculator.getSum();
-
-        assertEquals("The costCalculator2 Failed", expected, actutal, delta);
+        expectedInt = 11;
+        actualInt = PathCalculator.getSum();
+        assertEquals("The costCalculator2 Failed", expectedInt, actualInt, delta);
     }
 
     @Test
@@ -60,9 +76,9 @@ public class PhotonApplicationTest {
         Integer userRowChoice = 5;
         Integer userColumnChoice = 6;
         PathCalculator PathCalculator = new PathCalculator(matrix, userRowChoice, userColumnChoice);
-        String expected = "YES";
-        String actutal = PathCalculator.getComplete();
-        assertEquals("The costCalculator2IsCompleted Failed", expected, actutal);
+        expected = "YES";
+        actual = PathCalculator.getComplete();
+        assertEquals("The costCalculator2IsCompleted Failed", expected, actual);
     }
 
     @Test
@@ -75,10 +91,9 @@ public class PhotonApplicationTest {
         Integer userRowChoice = 3;
         Integer userColumnChoice = 5;
         PathCalculator PathCalculator = new PathCalculator(matrix, userRowChoice, userColumnChoice);
-        String expected = "NO";
-        String actutal = PathCalculator.getComplete();
-        assertEquals("The costCalculator3IsCompleted Failed", expected, actutal);
-
+        expected = "NO";
+        actual = PathCalculator.getComplete();
+        assertEquals("The costCalculator3IsCompleted Failed", expected, actual);
     }
 
     @Test
@@ -89,10 +104,10 @@ public class PhotonApplicationTest {
         Integer userRowChoice = 1;
         Integer userColumnChoice = 5;
         PathCalculator PathCalculator = new PathCalculator(matrix, userRowChoice, userColumnChoice);
-        Integer expected = 26;
-        Integer actutal = PathCalculator.getSum();
+        expectedInt = 26;
+        actualInt = PathCalculator.getSum();
 
-        assertEquals("The costCalculator4 Failed", expected, actutal, delta);
+        assertEquals("The costCalculator4 Failed", expectedInt, actualInt, delta);
 
     }
 
@@ -108,10 +123,10 @@ public class PhotonApplicationTest {
         Integer userRowChoice = 5;
         Integer userColumnChoice = 6;
         PathCalculator PathCalculator = new PathCalculator(matrix, userRowChoice, userColumnChoice);
-        Integer expected = 16;
-        Integer actutal = PathCalculator.getSum();
+        expectedInt = 16;
+        actualInt = PathCalculator.getSum();
 
-        assertEquals("The costCalculator1 Failed", expected, actutal, 1);
+        assertEquals("The costCalculator1 Failed", expectedInt, actualInt, 1);
     }
 
     @Test
@@ -122,10 +137,9 @@ public class PhotonApplicationTest {
         Integer userRowChoice = 1;
         Integer userColumnChoice = 5;
         PathCalculator PathCalculator = new PathCalculator(matrix, userRowChoice, userColumnChoice);
-        String expected = "YES";
-        String actutal = PathCalculator.getComplete();
-        assertEquals("The costCalculator4IsCompleted Failed", expected, actutal);
-
+        expected = "YES";
+        actual = PathCalculator.getComplete();
+        assertEquals("The costCalculator4IsCompleted Failed", expected, actual);
     }
 
     @Test
@@ -140,10 +154,9 @@ public class PhotonApplicationTest {
         Integer userRowChoice = 5;
         Integer userColumnChoice = 1;
         PathCalculator PathCalculator = new PathCalculator(matrix, userRowChoice, userColumnChoice);
-        Integer expected = 3;
-        Integer actutal = PathCalculator.getSum();
-
-        assertEquals("The costCalculator5 Failed", expected, actutal, delta);
+        expectedInt = 3;
+        actualInt = PathCalculator.getSum();
+        assertEquals("The costCalculator5 Failed", expectedInt, actualInt, delta);
     }
 
     @Test
@@ -158,9 +171,9 @@ public class PhotonApplicationTest {
         Integer userRowChoice = 5;
         Integer userColumnChoice = 1;
         PathCalculator PathCalculator = new PathCalculator(matrix, userRowChoice, userColumnChoice);
-        String expected = "YES";
-        String actutal = PathCalculator.getComplete();
-        assertEquals("The costCalculator5IsCompleted Failed", expected, actutal);
+        expected = "YES";
+        actual = PathCalculator.getComplete();
+        assertEquals("The costCalculator5IsCompleted Failed", expected, actual);
     }
 
     @Test
@@ -173,10 +186,9 @@ public class PhotonApplicationTest {
         Integer userRowChoice = 3;
         Integer userColumnChoice = 5;
         PathCalculator PathCalculator = new PathCalculator(matrix, userRowChoice, userColumnChoice);
-        Integer expected = 0;
-        Integer actutal = PathCalculator.getSum();
-
-        assertEquals("The costCalculator8 Failed", expected, actutal, delta);
+        expectedInt = 0;
+        actualInt = PathCalculator.getSum();
+        assertEquals("The costCalculator8 Failed", expectedInt, actualInt, delta);
     }
 
     @Test
@@ -189,9 +201,9 @@ public class PhotonApplicationTest {
         Integer userRowChoice = 3;
         Integer userColumnChoice = 5;
         PathCalculator PathCalculator = new PathCalculator(matrix, userRowChoice, userColumnChoice);
-        String expected = "NO";
-        String actutal = PathCalculator.getComplete();
-        assertEquals("The costCalculator8IsCompleted Failed", expected, actutal);
+        expected = "NO";
+        actual = PathCalculator.getComplete();
+        assertEquals("The costCalculator8IsCompleted Failed", expected, actual);
     }
 
     @Test
@@ -204,9 +216,9 @@ public class PhotonApplicationTest {
         Integer userRowChoice = 3;
         Integer userColumnChoice = 4;
         PathCalculator PathCalculator = new PathCalculator(matrix, userRowChoice, userColumnChoice);
-        Integer expected = 14;
-        Integer actutal = PathCalculator.getSum();
-        assertEquals("The costCalculator9 Failed", expected, actutal, delta);
+        expectedInt = 14;
+        actualInt = PathCalculator.getSum();
+        assertEquals("The costCalculator9 Failed", expectedInt, actualInt, delta);
     }
 
     @Test
@@ -219,9 +231,9 @@ public class PhotonApplicationTest {
         Integer userRowChoice = 3;
         Integer userColumnChoice = 4;
         PathCalculator PathCalculator = new PathCalculator(matrix, userRowChoice, userColumnChoice);
-        String expected = "YES";
-        String actutal = PathCalculator.getComplete();
-        assertEquals("The costCalculator9IsCompleted Failed", expected, actutal);
+        expected = "YES";
+        actual = PathCalculator.getComplete();
+        assertEquals("The costCalculator9IsCompleted Failed", expected, actual);
     }
 
     @Test
@@ -235,9 +247,9 @@ public class PhotonApplicationTest {
         Integer userRowChoice = 4;
         Integer userColumnChoice = 4;
         PathCalculator PathCalculator = new PathCalculator(matrix, userRowChoice, userColumnChoice);
-        String expected = "YES";
-        String actutal = PathCalculator.getComplete();
-        assertEquals("The costCalculator10IsCompleted Failed", expected, actutal);
+        expected = "YES";
+        actual = PathCalculator.getComplete();
+        assertEquals("The costCalculator10IsCompleted Failed", expected, actual);
     }
 
     @Test
@@ -251,10 +263,9 @@ public class PhotonApplicationTest {
         Integer userRowChoice = 4;
         Integer userColumnChoice = 2;
         PathCalculator PathCalculator = new PathCalculator(matrix, userRowChoice, userColumnChoice);
-        Integer expected = 10;
-        Integer actutal = PathCalculator.getSum();
-
-        assertEquals("The costCalculator11 Failed", expected, actutal, delta);
+        expectedInt = 10;
+        actualInt = PathCalculator.getSum();
+        assertEquals("The costCalculator11 Failed", expectedInt, actualInt, delta);
     }
 
     @Test
@@ -268,9 +279,9 @@ public class PhotonApplicationTest {
         Integer userRowChoice = 4;
         Integer userColumnChoice = 2;
         PathCalculator PathCalculator = new PathCalculator(matrix, userRowChoice, userColumnChoice);
-        String expected = "YES";
-        String actutal = PathCalculator.getComplete();
-        assertEquals("The costCalculator10IsCompleted Failed", expected, actutal);
+        expected = "YES";
+        actual = PathCalculator.getComplete();
+        assertEquals("The costCalculator10IsCompleted Failed", expected, actual);
     }
 
     @Test
@@ -285,9 +296,9 @@ public class PhotonApplicationTest {
         Integer userColumnChoice = 3;
         PathCalculator PathCalculator = new PathCalculator(matrix, userRowChoice, userColumnChoice);
         Integer expected = 10;
-        Integer actutal = PathCalculator.getSum();
+        Integer actual = PathCalculator.getSum();
 
-        assertEquals("The costCalculator11 Failed", expected, actutal, delta);
+        assertEquals("The costCalculator11 Failed", expected, actual, delta);
     }
 
     @Test
@@ -302,8 +313,8 @@ public class PhotonApplicationTest {
         Integer userColumnChoice = 3;
         PathCalculator PathCalculator = new PathCalculator(matrix, userRowChoice, userColumnChoice);
         String expected = "NO";
-        String actutal = PathCalculator.getComplete();
-        assertEquals("The costCalculator10IsCompleted Failed", expected, actutal);
+        String actual = PathCalculator.getComplete();
+        assertEquals("The costCalculator10IsCompleted Failed", expected, actual);
     }
 
     @Test
@@ -316,9 +327,9 @@ public class PhotonApplicationTest {
         Integer userColumnChoice = 20;
         PathCalculator PathCalculator = new PathCalculator(matrix, userRowChoice, userColumnChoice);
         Integer expected = 20;
-        Integer actutal = PathCalculator.getSum();
+        Integer actual = PathCalculator.getSum();
 
-        assertEquals("The costCalculator11 Failed", expected, actutal, delta);
+        assertEquals("The costCalculator11 Failed", expected, actual, delta);
     }
 
     @Test
@@ -331,7 +342,7 @@ public class PhotonApplicationTest {
         Integer userColumnChoice = 20;
         PathCalculator PathCalculator = new PathCalculator(matrix, userRowChoice, userColumnChoice);
         String expected = "YES";
-        String actutal = PathCalculator.getComplete();
-        assertEquals("The costCalculator10IsCompleted Failed", expected, actutal);
+        String actual = PathCalculator.getComplete();
+        assertEquals("The costCalculator10IsCompleted Failed", expected, actual);
     }
 }

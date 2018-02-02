@@ -6,27 +6,28 @@ package com.example.ady.PhotonChallenge.model;
 
 import java.util.ArrayList;
 import java.util.List;
+
 /**
  * Created by Ady.
  * This is my model From my MVP. This class takes a matrix, the number of Column and Row and
  * computes the lower path cost, the actual row and the element it passes through.
- *
  */
-public class CostCalculator {
-    public static final String TAG = CostCalculator.class.getSimpleName();
-    List<List<Integer>> pathRow ;
-    List<List<Integer>> nextNum ;
+public class PathCalculator {
+    public static final String TAG = PathCalculator.class.getSimpleName();
+    List<List<Integer>> pathRow;
+    List<List<Integer>> nextNum;
     List<String> complete = new ArrayList<>();
     List<Integer> sum = new ArrayList<>();
     //  dummy variables
     List<Integer> toCompare = new ArrayList<>();
     List<Integer> firstColumn = new ArrayList<>();
-    List<Integer> simplePathRow ;
-    List<Integer> simpleNextNum ;
-    public CostCalculator(Integer[][] matrix, Integer userRowChoice, Integer userColumnChoice) {
-        int somation =0 ;
+    List<Integer> simplePathRow;
+    List<Integer> simpleNextNum;
+
+    public PathCalculator(Integer[][] matrix, Integer userRowChoice, Integer userColumnChoice) {
+        int somation = 0;
         int min = 0;
-        int next =0;
+        int next = 0;
         int rowIndex = 0;
         int dummyCounter = 101;
         pathRow = new ArrayList<>();
@@ -38,7 +39,7 @@ public class CostCalculator {
             this.complete.add("YES");
             simpleNextNum = new ArrayList<>();
             simplePathRow = new ArrayList<>();
-            somation =0;
+            somation = 0;
             inneerLoop:
             for (int i = 0; i < userColumnChoice; i++) {
                 for (int j = 0; j < userRowChoice; j++) { // getting the next Column, saving in toCompare.
@@ -76,18 +77,18 @@ public class CostCalculator {
                             }
                         } else { // not in the first or last row
                             next = toCompare.get(rowIndex);
-                            int dummyRowIndex = rowIndex-1;
+                            int dummyRowIndex = rowIndex - 1;
                             boolean minusIndex = false;
-                            if(next> toCompare.get(rowIndex-1)){
-                                next = toCompare.get(rowIndex-1);
+                            if (next > toCompare.get(rowIndex - 1)) {
+                                next = toCompare.get(rowIndex - 1);
                                 minusIndex = true;
                             }
-                            if(next> toCompare.get(rowIndex+1)){
-                                next = toCompare.get(rowIndex+1);
-                                rowIndex +=1;
+                            if (next > toCompare.get(rowIndex + 1)) {
+                                next = toCompare.get(rowIndex + 1);
+                                rowIndex += 1;
                                 minusIndex = false;
                             }
-                            if(minusIndex){
+                            if (minusIndex) {
                                 rowIndex = dummyRowIndex;
                             }
                         }
@@ -104,68 +105,67 @@ public class CostCalculator {
                     }
                 }
                 if (somation + next >= 50) { // stop if sum is more than 50
-                    this.complete.set(p,"NO");
-                    break ;
+                    this.complete.set(p, "NO");
+                    break;
                 }
                 somation += next;
-                this.simplePathRow.add(rowIndex);
-                this.simpleNextNum.add(next);
-                this.toCompare.clear();
-            }
-            this.sum.add(somation);
-            this.nextNum.add(simpleNextNum);
-            this.pathRow.add(simplePathRow);
+                this.simplePathRow.add(rowIndex); // append the current row to the list of Rows
+                this.simpleNextNum.add(next); // append the next element to the list of elements
+                this.toCompare.clear(); // clear the compare column
+            } // one path is completed
+            this.sum.add(somation); // the is the sum for one path
+            this.nextNum.add(simpleNextNum); // adds  the list of elements to the list that stores all the elements
+            this.pathRow.add(simplePathRow); //adds  the list of paths to the list that stores all the path
         }
     }
-    public CostCalculator() {
+
+    public PathCalculator() {
     }
+
     public List<Integer> getPathRow() {
         return this.pathRow.get(getLowestCostIndex());
     }
-    public List<Integer> getNextNum() {
 
+    public List<Integer> getNextNum() {
         return nextNum.get(getLowestCostIndex());
     }
-    public int getSum() {
 
+    public int getSum() {
         return sum.get(getLowestCostIndex());
     }
-    public String getComplete() {
 
+    public String getComplete() {
         return complete.get(getLowestCostIndex());
     }
-    public void clear (){
-        this.nextNum.clear();
-        this.pathRow.clear();
-    }
-    public int getLowestCostIndex(){
-        int index=0;
+
+    public int getLowestCostIndex() { //searching to get the lowest cost
+        int index = 0;
         int min = 0;
         boolean atLestOnePathIsCompleted = false;
-        for (int i = 0; i <this.complete.size() ; i++) {
-            if(this.complete.get(i).matches("YES")){
-                atLestOnePathIsCompleted =true;
+        for (int i = 0; i < this.complete.size(); i++) { // check if there is any completed path
+            if (this.complete.get(i).matches("YES")) {
+                atLestOnePathIsCompleted = true;
             }
         }
-        if(atLestOnePathIsCompleted) {
+        if (atLestOnePathIsCompleted) { // if there is a completed path
             min = this.sum.get(0);
             index = 0;
             for (int i = 0; i < this.sum.size(); i++) {
                 if (min > this.sum.get(i)) {
                     min = this.sum.get(i);
                     index = i;
-                } else {
+                } else { // dont want to return the sum that is 0, if it not completed
                     if (min == 0 && this.complete.get(i).matches("YES")) {
                         index = i;
                         min = this.sum.get(i);
                     }
                 }
             }
-        }else{
+        } else { // no path made it
             min = this.sum.get(0);
             index = 0;
-            for (int i = 0; i <this.sum.size() ; i++) {
-                if(min< this.sum.get(i)){
+            for (int i = 0; i < this.sum.size(); i++) { // I will return the one that moved more
+                if (min < this.sum.get(i)) {
                     min = this.sum.get(i);
                     index = i;
                 }
@@ -173,5 +173,4 @@ public class CostCalculator {
         }
         return index;
     }
-
 }

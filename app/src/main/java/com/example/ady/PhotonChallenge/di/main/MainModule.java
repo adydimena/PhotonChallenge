@@ -1,6 +1,6 @@
 package com.example.ady.PhotonChallenge.di.main;
-import com.example.ady.PhotonChallenge.model.CostCalculator;
-import com.example.ady.PhotonChallenge.view.main.MainPresenter;
+import com.example.ady.PhotonChallenge.model.PathCalculator;
+import com.example.ady.PhotonChallenge.view.main.PhotonPresenter;
 import dagger.Module;
 import dagger.Provides;
 /**
@@ -9,7 +9,7 @@ import dagger.Provides;
 @Module
 public class MainModule {
     @Provides
-    MainPresenter providesMainPresenter (CostCalculator newsDataSource){
-        return new MainPresenter();
+    PhotonPresenter providesMainPresenter (PathCalculator newsDataSource){
+        return new PhotonPresenter();
     }
 }

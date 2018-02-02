@@ -171,7 +171,7 @@ public class MainActivity extends AppCompatActivity implements MainContract.View
     }
 
 
-      static Handler  handler;
+      static Handler  handler; // todo changed this to a different class
 
     {
         handler = new Handler() {

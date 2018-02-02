@@ -74,14 +74,20 @@ public class CostCalculator {
                                 rowIndex = toCompare.size() - 2;
                             }
                         } else { // not in the first or last row
-                            next = toCompare.get(rowIndex - 1);
-                            int k = rowIndex - 1;
-                            rowIndex -= 1;
-                            for (int j = k; j < k + 2; j++) {
-                                if (next > toCompare.get(j)) {
-                                    next = toCompare.get(j);
-                                    rowIndex = j;
-                                }
+                            next = toCompare.get(rowIndex);
+                            int dummyRowIndex = rowIndex-1;
+                            boolean minusIndex = false;
+                            if(next> toCompare.get(rowIndex-1)){
+                                next = toCompare.get(rowIndex-1);
+                                minusIndex = true;
+                            }
+                            if(next> toCompare.get(rowIndex+1)){
+                                next = toCompare.get(rowIndex+1);
+                                rowIndex +=1;
+                                minusIndex = false;
+                            }
+                            if(minusIndex){
+                                rowIndex = dummyRowIndex;
                             }
                         }
                     } else { // there is 3 or fewer rows. can analize the entire column

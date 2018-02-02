@@ -211,22 +211,6 @@ public class PhotonChallengeTest {
         assertEquals("The costCalculator9IsCompleted Failed",expected, actutal);
     }
     @Test
-    public void costCalculator10() {
-        Integer[][] matrix = new Integer[][]{
-                { 6, 3, -5, 9 },
-                { -5, 2, 4, 10 },
-                { 3, -2, 6, 10 },
-                {6,-1,-2,10}
-        };
-        Integer userRowChoice = 4;
-        Integer userColumnChoice = 4;
-        CostCalculator CostCalculator = new CostCalculator(matrix,userRowChoice,userColumnChoice);
-        Integer expected = 0;
-        Integer actutal = CostCalculator.getSum();
-        int delta = 2;
-        assertEquals("The costCalculator10 Failed",expected, actutal,delta);
-    }
-    @Test
     public void costCalculator10isCompleted() {
         Integer[][] matrix = new Integer[][]{
                 { 6, 3, -5, 9 },

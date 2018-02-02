@@ -1,5 +1,6 @@
 package com.example.ady.PhotonChallenge.di.app;
-import com.example.ady.PhotonChallenge.model.costCalculator;
+import com.example.ady.PhotonChallenge.model.CostCalculator;
+
 import dagger.Module;
 import dagger.Provides;
 /**
@@ -11,7 +12,7 @@ public class AppModule {
     public AppModule() {
     }
     @Provides
-    costCalculator providesRemoteDataSource(){
-        return new costCalculator();
+    CostCalculator providesRemoteDataSource(){
+        return new CostCalculator();
     }
 }

@@ -10,7 +10,8 @@ import android.widget.EditText;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import com.example.ady.PhotonChallenge.R;
-import com.example.ady.PhotonChallenge.model.costCalculator;
+import com.example.ady.PhotonChallenge.model.CostCalculator;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -37,7 +38,7 @@ public class MainPresenter implements MainContract.Presenter {
         for (int i =1 ; i < 6 ; i++) {
             rows.add(i);
         }
-        for (int i = 5; i <101 ; i++) {
+        for (int i = 2; i <102 ; i++) {
             columns.add(i);
         }
         ArrayAdapter<Integer> rowadapter = new ArrayAdapter<Integer>(context,
@@ -94,11 +95,11 @@ public class MainPresenter implements MainContract.Presenter {
     }
     @Override
     public void getComputeLowestCost(Integer[][] matrix, Integer userRowChoice, Integer userColumnChoice, Context context) {
-        costCalculator costCalculator = new costCalculator(matrix,userRowChoice,userColumnChoice);
-        view.coloringTable(costCalculator.getNextNum(),costCalculator.getPathrow());
-        view.setPathRow(costCalculator.getPathrow());
-        view.setSum(costCalculator.getSum());
-        view.setComplete(costCalculator.getComplete());
-        costCalculator.clear();
+        CostCalculator CostCalculator = new CostCalculator(matrix,userRowChoice,userColumnChoice);
+        view.coloringTable(CostCalculator.getNextNum(), CostCalculator.getPathRow());
+        view.setPathRow(CostCalculator.getPathRow());
+        view.setSum(CostCalculator.getSum());
+        view.setComplete(CostCalculator.getComplete());
+       // CostCalculator.clear();
     }
 }

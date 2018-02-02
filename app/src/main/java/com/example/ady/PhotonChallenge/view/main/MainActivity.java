@@ -3,6 +3,7 @@
  * such as traversing the matrix
  */
 package com.example.ady.PhotonChallenge.view.main;
+import android.content.Context;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
@@ -28,7 +29,8 @@ public class MainActivity extends AppCompatActivity implements MainContract.View
     MainPresenter mainPresenter;
     public static final String TAG = MainActivity.class.getSimpleName();
     Spinner rowOption, columnOption;
-    Integer userRowChoice =1  ,userCloumnChoice=5 ;
+    Integer userRowChoice ;
+    Integer userCloumnChoice ;
     TableLayout table;
     TextView displayYesNo,displaySum,displayPath;
     @Override
@@ -37,7 +39,6 @@ public class MainActivity extends AppCompatActivity implements MainContract.View
         setContentView(R.layout.activity_main);
         PhotonChallenge.get(this).getMainComponent().inject(this);
         mainPresenter.attachView(this);
-
         bindSpinners();
         mainPresenter.getRowAndColumn(this);
         getRowandColomnbyChooseByUser();
@@ -126,8 +127,9 @@ public class MainActivity extends AppCompatActivity implements MainContract.View
             row = (TableRow) table.getChildAt(rowPath.get(i));
             isfound = false;
             for (int j = 0; j <userCloumnChoice ; j++) {
-                editText = (EditText) row.getChildAt(j);
-                if (Integer.parseInt(editText.getText().toString()) == nextNum.get(k) && !isfound && j >=i){
+              editText = (EditText) row.getChildAt(j);
+                if (Integer.parseInt(editText.getText().toString()) == nextNum.get(k)
+                        && !isfound && j >=i){
                     editText.setBackgroundResource(R.color.Green);
                     isfound = true;
                 }
@@ -144,26 +146,48 @@ public class MainActivity extends AppCompatActivity implements MainContract.View
     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
         Toast.makeText(this, "this", Toast.LENGTH_SHORT).show();
     }
-        Handler handler = new Handler() {
-            @Override
-            public void handleMessage(Message msg) {
-                super.handleMessage(msg);
-                if(msg.what == 1){
-                    userRowChoice = msg.arg1;
-                }
-                if(msg.what == 2){
-                    userCloumnChoice = msg.arg1;
-                }
-                if (table != null) {
-                    mainPresenter.getTableSetup(table, userRowChoice, userCloumnChoice, MainActivity.this);
-                }
 
-            }
-        };
     public void generateRandom(View view) {
         mainPresenter.getRandom(userRowChoice,userCloumnChoice,table,this);
     }
     public void run(View view) {
-        mainPresenter.getMatrix(table,userRowChoice,userCloumnChoice,this);
+        boolean atLeatOneElementIsEmpty = false;
+        TableRow row = new TableRow(this);
+        EditText editText = new EditText(this);
+        for (int i = 0; i < userRowChoice ; i++) {
+            row = (TableRow) table.getChildAt(i);
+            for (int j = 0; j <userCloumnChoice ; j++) {
+                editText = (EditText) row.getChildAt(j);
+                String dumyEditText = editText.getText().toString();
+                if (dumyEditText.matches("")){
+                    atLeatOneElementIsEmpty = true;
+                }
+            }
+        }
+        if (atLeatOneElementIsEmpty)
+            Toast.makeText(this,"Make Sure You filled out the All fields of the matrix ", Toast.LENGTH_LONG ).show();
+        if(!atLeatOneElementIsEmpty)
+            mainPresenter.getMatrix(table, userRowChoice, userCloumnChoice, this);
     }
+
+
+      static Handler  handler;
+
+    {
+        handler = new Handler() {
+            @Override
+            public void handleMessage(Message msg) {
+                super.handleMessage(msg);
+                if (msg.what == 1) {
+                    userRowChoice = msg.arg1;
+                }
+                if (msg.what == 2) {
+                    userCloumnChoice = msg.arg1;
+                }
+                mainPresenter.getTableSetup(table, userRowChoice, userCloumnChoice, MainActivity.this);
+            }
+        };
+    }
+
+
 }

@@ -6,6 +6,7 @@
 package com.example.ady.PhotonChallenge.view.main;
 
 import android.content.Context;
+import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.TableLayout;
@@ -63,8 +64,8 @@ public class PhotonPresenter implements PhotonContract.Presenter {
                 TableRow.LayoutParams lp = new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT);
                 tableRow.setLayoutParams(lp);
                 etItem[j] = new EditText(context);
-                etItem[j].setWidth(250);
-                etItem[j].setHeight(300);
+                etItem[j].setWidth(150);
+                etItem[j].setHeight(150);
                 tableRow.addView(etItem[j]);
             }
             table.addView(tableRow, i);
